@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div><h3>Menot</h3></div>
+
+<table class="table table-hover table-responsive-md">
+	<tr class="bg-info">
+		<th>Päivämäärä</th>
+		<th>Tyyppi</th>
+		<th>Muistiinpano</th>
+		<th>Summa</th>
+		<th>Maksaja</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr th:each="meno : ${ menot }">
+		<td th:text="${ meno.getPvm() }"></td>
+		<td th:text="${ meno.getMenokategoria().getMenokategoriaNimi() }"></td>
+		<td th:text="${ meno.getMuistiinpano() }"></td>
+		<td th:text="${ meno.getSumma() }"></td>
+		<td th:text="${ meno.getJasen().getNimi() }"></td>
+		<td><a th:href="@{/editmeno/{id}(id=${meno.menoId})}" class="btn btn-info">Edit</a> </td>
+		<td><a th:href="@{/deletemeno/{id}(id=${meno.menoId})}" class="btn btn-danger">Delete</a></td>
+	</tr>
+</table>
+</body>
+</html>

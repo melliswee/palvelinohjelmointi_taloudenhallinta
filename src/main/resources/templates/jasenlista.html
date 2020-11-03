@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div>
+
+<h3>Ruokakunnan jäsenet</h3>
+
+<table class="table table-hover table-responsive-md">
+	<tr class="bg-info">
+		<th>Jäsen</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr th:each="jasen : ${ jasenet }">
+		<td th:text="${ jasen.getNimi() }"></td>
+		<td><a th:href="@{/editjasen/{id}(id=${jasen.jasenId})}" class="btn btn-info">Muokkaa</a> </td>
+		<td><a th:href="@{/deletejasen/{id}(id=${jasen.jasenId})}" class="btn btn-danger">Poista</a></td>
+	</tr>
+</table>
+
+<p><a href="/addjasen" class="btn btn-success">Lisää jäsen</a></p>
+</div>
+</body>
+</html>

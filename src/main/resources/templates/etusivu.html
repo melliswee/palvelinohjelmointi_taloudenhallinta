@@ -30,5 +30,35 @@
 </table>
 
 <p><a href="/addmeno" class="btn btn-success">Lisää meno</a></p>
+
+<div>
+
+<h3>Tulot</h3>
+
+<table class="table table-hover table-responsive-md">
+	<tr class="bg-info">
+		<th>Päivämäärä</th>
+		<th>Tyyppi</th>
+		<th>Muistiinpano</th>
+		<th>Summa</th>
+		<th>Tuoja</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr th:each="tulo : ${ tulot }">
+		<td th:text="${ tulo.getPvm() }"></td>
+		<td th:text="${ tulo.getTulokategoria().getTulokategoriaNimi() }"></td>
+		<td th:text="${ tulo.getMuistiinpano() }"></td>
+		<td th:text="${ tulo.getSumma() }"></td>
+		<td th:text="${ tulo.getJasen().getNimi() }"></td>
+		<td><a th:href="@{/edittulo/{id}(id=${tulo.tuloId})}" class="btn btn-info">Muokkaa</a> </td>
+		<td><a th:href="@{/deletetulo/{id}(id=${tulo.tuloId})}" class="btn btn-danger">Poista</a></td>
+	</tr>
+</table>
+
+<p><a href="/addtulo" class="btn btn-success">Lisää tulo</a></p>
+<p></p>
+<p><a href="/jasenlista" class="btn btn-success">Jäsenlistaukseen</a></p>
+</div>
 </body>
 </html>

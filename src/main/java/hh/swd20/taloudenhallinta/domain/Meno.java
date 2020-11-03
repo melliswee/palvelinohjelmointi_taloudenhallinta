@@ -1,7 +1,6 @@
 package hh.swd20.taloudenhallinta.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -17,6 +18,7 @@ public class Meno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //määrää että tietokantapalvelimen on luotava uniikki id tietoriville
 	private Long menoId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate pvm; //muotoa YYYY-mm-DD
 	private double summa;
 	private String muistiinpano;

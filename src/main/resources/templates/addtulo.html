@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+
+<div class="container">
+<h3>Lisää tulo</h3>
+		<form th:object="${tulo}" th:action="@{/savetulo}" action="#" method="post">
+
+		  	<label for="pvm">Päivämäärä</label>
+			<input type="date" id="pvm" th:value="*{pvm}" th:field="*{pvm}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		  	<label for="tklist">Tyyppi</label>
+			<select id="tklist" th:field="*{tulokategoria}" class="form-control">
+				<option th:each="tulokategoria: ${tulokategoriat}" th:value="${tulokategoria.getTulokategoriaId()}" th:text="${tulokategoria.getTulokategoriaNimi()}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		  	<label for="muistiinpano">Muistiinpano</label>
+			<input type="text" th:field="*{muistiinpano}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="summa">Summa</label>
+			<input type="number" th:field="*{summa}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<div style="clear: both; display: block; height: 10px;"></div>					
+		  	<label for="jasenlist">Tuoja</label>
+			 <select id="jasenlist" th:field="*{jasen}" class="form-control">
+       			<option th:each="jasen: ${jasenet}" th:value="${jasen.getJasenId()}" th:text="${jasen.getNimi()}"></option>
+    		</select>
+    		<div style="clear: both; display: block; height: 10px;"></div>
+
+			<input type="submit" value="Tallenna" class="btn btn-primary"></input>
+
+		</form>
+		<p></p>
+	<a href="/tulolista">Tulojen listaukseen</a>
+	<p></p>
+	<a href="/etusivu">Etusivulle</a>
+	</div>
+
+</body>
+</html>

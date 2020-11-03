@@ -36,7 +36,6 @@ public class JasenController {
 		return "redirect:jasenlista";
 	}
 	
-	//TODO: tarkista toimiiko
 	@GetMapping("/deletejasen/{id}")
 	public String deleteJasen(@PathVariable("id") Long jasenId, Model model) {
 		jrepository.deleteById(jasenId);
@@ -44,5 +43,10 @@ public class JasenController {
 	}
 	
 	//TODO: editjasen
+	@GetMapping("/editjasen/{id}")
+	public String editJasen(@PathVariable("id") Long jasenId, Model model) {
+		model.addAttribute("jasen", jrepository.findById(jasenId));
+		return "editjasen";
+	}
 
 }

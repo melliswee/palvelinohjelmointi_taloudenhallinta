@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+</head>
+<body>
+<h1>Menokategoriat</h1>
+<table class="table table-striped">
+	<tr>
+	<th>Nimi</th>
+	</tr>
+	<tr th:each="menokategoria : ${ menokategoriat }">
+	<td th:text="${ menokategoria.getMenokategoriaNimi() }">Nimi</td> 
+
+	<td><a th:href="@{/editmenokategoria/{id}(id=${menokategoria.getMenokategoriaId()})}" class="btn btn-primary">Muuta</a></td> 
+	<td><a th:href="@{/deletemenokategoria/{id}(id=${menokategoria.getMenokategoriaId()})}" class="btn btn-danger">Poista</a></td>
+	</tr>
+</table>
+
+<p><a href="/addmenokategoria" class="btn btn-success">Lisää menokategoria</a></p>
+
+<h1>Tulokategoriat</h1>
+<table class="table table-striped">
+	<tr>
+	<th>Nimi</th>
+	</tr>
+	<tr th:each="tulokategoria : ${ tulokategoriat }">
+	<td th:text="${ tulokategoria.getTulokategoriaNimi() }">Nimi</td> 
+
+	<td><a th:href="@{/edittulokategoria/{id}(id=${tulokategoria.getTulokategoriaId()})}" class="btn btn-primary">Muuta</a></td> 
+	<td><a th:href="@{/deletetulokategoria/{id}(id=${tulokategoria.getTulokategoriaId()})}" class="btn btn-danger">Poista</a></td>
+	</tr>
+</table>
+
+<p><a href="/addtulokategoria" class="btn btn-success">Lisää tulokategoria</a></p>
+
+<p><a href="/etusivu">Etusivulle</a></p>
+
+</body>
+</html>

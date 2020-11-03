@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<h3>Lisää tulokategoria</h3>
+<div>
+		<form th:object="${tulokategoria}" th:action="@{/savetulokategoria}" action="#" method="post">
+		  	<label for="nimi">Nimi</label>
+			<input type="text" id="tulokategoriaNimi" th:field="*{tulokategoriaNimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save" class="btn btn-primary"></input>
+		</form>
+	</div>
+<p></p>
+<a href="/kategorialista">Kategorialistaukseen</a>
+</body>
+</html>

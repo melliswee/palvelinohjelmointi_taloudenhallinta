@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.ThymeLeaf.org">
+<head>
+	<title>Taloudenhallinta</title>
+	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- bootstrap tiedostoviittauksessa on otettava huomioon viittauksen suhteellisuus, joten "@/css/bootstrap..."-kohdassa on tärkeää muistaa tuo /, jotta css-tiedosto löytyy-->
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+<body>
+
+<div class="container"> 
+<h3>Muokkaa jäsenen tietoja</h3>
+		<form th:object="${jasen}" th:action="@{../savejasen}" action="#" method="post">
+		  	<input type="hidden" th:field="*{jasenId}" />
+			
+			<label for="nimi">Nimi</label>
+			<input type="text" th:field="*{nimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" value="Tallenna" class="btn btn-success"></input>
+		</form>
+		<p></p>
+		<a href="/jasenlista">Jäsenien listaukseen</a>
+		<p></p>
+		<a href="/etusivu">Etusivulle</a>
+	</div>
+
+</body>
+</html>

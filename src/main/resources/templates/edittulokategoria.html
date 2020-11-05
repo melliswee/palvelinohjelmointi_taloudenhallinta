@@ -9,8 +9,34 @@
 </head>
 <body>
 
-<div class="container"> 
-<h3>Muokkaa tulokategorian tietoja</h3>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h5><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h5>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/etusivu">Etusivu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/menolista">Menot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tulolista">Tulot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="jasenlista">Jäsenet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kategorialista">Kategoriat</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div> 
+<h5>Muokkaa tulokategorian tietoja</h5>
 		<form th:object="${tulokategoria}" th:action="@{../savetulokategoria}" action="#" method="post">
 		  	<input type="hidden" th:field="*{tulokategoriaId}" />
 			
@@ -20,10 +46,7 @@
 			
 			<input type="submit" value="Tallenna" class="btn btn-success"></input>
 		</form>
-		<p></p>
-		<a href="/kategorialista">Kategorialistaukseen</a>
-		<p></p>
-		<a href="/etusivu">Etusivulle</a>
+
 	</div>
 
 </body>

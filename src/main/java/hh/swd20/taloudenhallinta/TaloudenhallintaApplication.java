@@ -19,6 +19,8 @@ import hh.swd20.taloudenhallinta.domain.Tulo;
 import hh.swd20.taloudenhallinta.domain.TuloRepository;
 import hh.swd20.taloudenhallinta.domain.Tulokategoria;
 import hh.swd20.taloudenhallinta.domain.TulokategoriaRepository;
+import hh.swd20.taloudenhallinta.domain.User;
+import hh.swd20.taloudenhallinta.domain.UserRepository;
 
 
 @SpringBootApplication
@@ -31,8 +33,13 @@ public class TaloudenhallintaApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo (MenoRepository mrepository, MenokategoriaRepository mkrepository, JasenRepository jrepository, TulokategoriaRepository tkrepository, TuloRepository trepository) {
+	public CommandLineRunner demo (MenoRepository mrepository, MenokategoriaRepository mkrepository, JasenRepository jrepository, TulokategoriaRepository tkrepository, TuloRepository trepository, UserRepository urepository) {
 		return (args) -> {
+			
+			User u1= new User("user", "$2a$04$KFeHewQhVXuybwKFWPTkxeLtNw8GWJR8LWcFEoi/NtJN2weBRQmCS", "USER");
+			User u2= new User("admin", "$2a$05$vtpBT/bIy1OmlrweYtCNYeLh0oAhjEC54Ui6XtFQY4ImVOm/RPXm6", "ADMIN");
+			urepository.save(u1);
+			urepository.save(u2);
 			
 			System.out.println("Hello");
 			Jasen j1 = new Jasen("Mellu");

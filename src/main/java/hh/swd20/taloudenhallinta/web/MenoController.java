@@ -1,5 +1,8 @@
 package hh.swd20.taloudenhallinta.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.taloudenhallinta.domain.JasenRepository;
 import hh.swd20.taloudenhallinta.domain.Meno;
@@ -30,6 +36,16 @@ public class MenoController {
 	@Autowired
 	private TuloRepository trepository;
 	
+	@GetMapping("/")
+	public String FirstPage() {
+		return "login";
+	}
+	
+	@GetMapping("/login")
+	public String LogIn() {
+		return "login";
+	}
+	
 	@GetMapping("/index")
 	public String ByeMoneys(Model model) {
 		String msg = "Bye moneys!";
@@ -37,7 +53,7 @@ public class MenoController {
 		return "index";
 	}
 	
-	@GetMapping({"/", "/etusivu"})
+	@GetMapping("/etusivu")
 	public String haeEtusivu(Model model) {
 		model.addAttribute("menot", mrepository.findAll());
 		model.addAttribute("tulot", trepository.findAll());
@@ -49,6 +65,18 @@ public class MenoController {
 		model.addAttribute("menot", mrepository.findAll());
 		return "menolista";
 	}
+	
+	// RESTful service to get all expenses
+    @RequestMapping(value="/menot", method = RequestMethod.GET)
+    public @ResponseBody List<Meno> menoListRest() {	
+        return (List<Meno>) mrepository.findAll();
+    }
+    
+	// RESTful service to get expense by id
+    @RequestMapping(value="/menot/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Meno> findMenoRest(@PathVariable("id") Long menoId) {	
+    	return mrepository.findById(menoId);
+    } 
 	
 	
 	@GetMapping("/addmeno")

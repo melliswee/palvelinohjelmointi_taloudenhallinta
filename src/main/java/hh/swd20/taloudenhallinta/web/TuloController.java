@@ -1,5 +1,8 @@
 package hh.swd20.taloudenhallinta.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.taloudenhallinta.domain.JasenRepository;
 import hh.swd20.taloudenhallinta.domain.Tulo;
@@ -31,6 +37,18 @@ public class TuloController {
 		model.addAttribute("tulot", trepository.findAll());
 		return "tulolista";
 	}
+	
+	// RESTful service to get all income
+    @RequestMapping(value="/tulot", method = RequestMethod.GET)
+    public @ResponseBody List<Tulo> tuloListRest() {	
+        return (List<Tulo>) trepository.findAll();
+    }
+    
+	// RESTful service to get income by id
+    @RequestMapping(value="/tulot/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Tulo> findTuloRest(@PathVariable("id") Long tuloId) {	
+    	return trepository.findById(tuloId);
+    } 
 	
 	
 	@GetMapping("/addtulo")

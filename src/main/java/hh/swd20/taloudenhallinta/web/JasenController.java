@@ -1,5 +1,8 @@
 package hh.swd20.taloudenhallinta.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.taloudenhallinta.domain.Jasen;
 import hh.swd20.taloudenhallinta.domain.JasenRepository;
@@ -23,6 +29,20 @@ public class JasenController {
 		model.addAttribute("jasenet", jrepository.findAll());
 		return "jasenlista";
 	}
+	
+	// RESTful service to get all members
+    @RequestMapping(value="/jasenet", method = RequestMethod.GET)
+    public @ResponseBody List<Jasen> jasenListRest() {	
+        return (List<Jasen>) jrepository.findAll();
+    }
+    
+    //tehtävä 5.1
+	// RESTful service to get a member by id
+    @RequestMapping(value="/jasenet/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Jasen> findBookRest(@PathVariable("id") Long jasenId) {	
+    	return jrepository.findById(jasenId);
+    } 
+	
 	
 	@GetMapping("/addjasen")
 	public String addJasen(Model model) {

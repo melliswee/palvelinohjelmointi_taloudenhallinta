@@ -29,7 +29,7 @@ public class Meno {
 	private Menokategoria menokategoria;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("menot")
+	@JsonIgnoreProperties({"menot", "tulot"}) //ignore both Jasen lists
 	@JoinColumn(name="jasenId")
 	private Jasen jasen;
 	

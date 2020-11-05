@@ -1,5 +1,8 @@
 package hh.swd20.taloudenhallinta.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.taloudenhallinta.domain.Tulokategoria;
 import hh.swd20.taloudenhallinta.domain.TulokategoriaRepository;
@@ -17,6 +23,18 @@ public class TulokategoriaController {
 	
 	@Autowired
 	private TulokategoriaRepository tkrepository;
+	
+	// RESTful service to get all expense categories
+    @RequestMapping(value="/tulokategoriat", method = RequestMethod.GET)
+    public @ResponseBody List<Tulokategoria> tulokategoriaListRest() {	
+        return (List<Tulokategoria>) tkrepository.findAll();
+    }
+    
+	// RESTful service to get an expense category by id
+    @RequestMapping(value="/tulokategoriat/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Tulokategoria> findTulokategoriaRest(@PathVariable("id") Long tulokategoriaId) {	
+    	return tkrepository.findById(tulokategoriaId);
+    } 
 	
 	@GetMapping("/addtulokategoria")
 	public String addTulokategoria(Model model) {

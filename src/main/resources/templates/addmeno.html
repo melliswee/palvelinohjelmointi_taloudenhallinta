@@ -7,8 +7,34 @@
 </head>
 <body>
 
-<div class="container">
-<h3>Lisää meno</h3>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h3><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h3>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/etusivu">Etusivu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/menolista">Menot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tulolista">Tulot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="jasenlista">Jäsenet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kategorialista">Kategoriat</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div>
+<h5>Lisää meno</h5>
 		<form th:object="${meno}" th:action="@{/savemeno}" action="#" method="post">
 
 		  	<label for="pvm">Päivämäärä</label>
@@ -16,7 +42,7 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 
 		  	<label for="mklist">Tyyppi</label>
-			<select id="mklist" th:field="*{menokategoria}" class="form-control">
+			<select id="mklist" th:field="*{menokategoria}" class="form-control-lg-right">
 				<option th:each="menokategoria: ${menokategoriat}" th:value="${menokategoria.getMenokategoriaId()}" th:text="${menokategoria.getMenokategoriaNimi()}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
@@ -31,7 +57,7 @@
 
 			<div style="clear: both; display: block; height: 10px;"></div>					
 		  	<label for="jasenlist">Maksaja</label>
-			 <select id="jasenlist" th:field="*{jasen}" class="form-control">
+			 <select id="jasenlist" th:field="*{jasen}" class="form-control-lg-right">
        			<option th:each="jasen: ${jasenet}" th:value="${jasen.getJasenId()}" th:text="${jasen.getNimi()}"></option>
     		</select>
     		<div style="clear: both; display: block; height: 10px;"></div>
@@ -39,10 +65,7 @@
 			<input type="submit" value="Tallenna" class="btn btn-primary"></input>
 
 		</form>
-		<p></p>
-	<a href="/menolista">Menojen listaukseen</a>
-	<p></p>
-	<a href="/etusivu">Etusivulle</a>
+
 	</div>
 
 </body>

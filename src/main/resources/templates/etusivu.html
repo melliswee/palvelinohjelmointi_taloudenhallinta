@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
+<html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-<div><h3>Menot</h3></div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h3><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h3>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Etusivu <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/menolista">Menot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tulolista">Tulot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jasenlista">Jäsenet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kategorialista">Kategoriat</a>
+      </li>
+      <li>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+		</form>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div><h5><a href="/menolista">Menot</a></h5></div>
 
 <table class="table table-hover table-responsive-md">
 	<tr class="bg-info">
@@ -33,7 +65,7 @@
 
 <div>
 
-<h3>Tulot</h3>
+<h5><a href="/tulolista">Tulot</a></h5>
 
 <table class="table table-hover table-responsive-md">
 	<tr class="bg-info">
@@ -57,10 +89,6 @@
 </table>
 
 <p><a href="/addtulo" class="btn btn-success">Lisää tulo</a></p>
-<p></p>
-<p><a href="/jasenlista" class="btn btn-secondary">Jäsenlistaukseen</a></p>
-<p></p>
-<p><a href="/kategorialista" class="btn btn-primary">Kategorialistaukseen</a></p>
 </div>
 </body>
 </html>

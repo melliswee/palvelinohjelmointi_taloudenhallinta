@@ -1,5 +1,8 @@
 package hh.swd20.taloudenhallinta.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.taloudenhallinta.domain.Menokategoria;
 import hh.swd20.taloudenhallinta.domain.MenokategoriaRepository;
@@ -28,6 +34,19 @@ public class MenokategoriaController {
 		model.addAttribute("tulokategoriat", tkrepository.findAll());
 		return "kategorialista";
 	}
+	
+	// RESTful service to get all expense categories
+    @RequestMapping(value="/menokategoriat", method = RequestMethod.GET)
+    public @ResponseBody List<Menokategoria> menokategoriaListRest() {	
+        return (List<Menokategoria>) mkrepository.findAll();
+    }
+    
+	// RESTful service to get an expense category by id
+    @RequestMapping(value="/menokategoriat/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Menokategoria> findMenokategoriaRest(@PathVariable("id") Long menokategoriaId) {	
+    	return mkrepository.findById(menokategoriaId);
+    } 
+	
 	
 	@GetMapping("/addmenokategoria")
 	public String addMenokategoria(Model model) {

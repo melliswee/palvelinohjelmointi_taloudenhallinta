@@ -7,7 +7,34 @@
 
 </head>
 <body>
-<h1>Menokategoriat</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h3><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h3>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Etusivu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/menolista">Menot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tulolista">Tulot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jasenlista">Jäsenet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kategorialista">Kategoriat <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h5>Menokategoriat</h5>
 <table class="table table-striped">
 	<tr>
 	<th>Nimi</th>
@@ -22,7 +49,7 @@
 
 <p><a href="/addmenokategoria" class="btn btn-success">Lisää menokategoria</a></p>
 
-<h1>Tulokategoriat</h1>
+<h5>Tulokategoriat</h5>
 <table class="table table-striped">
 	<tr>
 	<th>Nimi</th>
@@ -37,7 +64,7 @@
 
 <p><a href="/addtulokategoria" class="btn btn-success">Lisää tulokategoria</a></p>
 
-<p><a href="/etusivu">Etusivulle</a></p>
+
 
 </body>
 </html>

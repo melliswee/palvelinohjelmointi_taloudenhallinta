@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
+<html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -31,15 +31,21 @@
       </li>
     </ul>
   </div>
+    <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
+  </div>
 </nav>
 
 <h5>Lisää tulokategoria</h5>
 <div>
 		<form th:object="${tulokategoria}" th:action="@{/savetulokategoria}" action="#" method="post">
+		  	<p class="text-danger" th:if="${#fields.hasErrors('tulokategoriaNimi')}" th:errors="*{tulokategoriaNimi}">Error</p>
 		  	<label for="nimi">Nimi</label>
 			<input type="text" id="tulokategoriaNimi" th:field="*{tulokategoriaNimi}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Save" class="btn btn-primary"></input>
+			<input type="submit" value="Tallenna" class="btn btn-primary"></input>
 		</form>
 	</div>
 

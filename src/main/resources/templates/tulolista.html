@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
+<html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Etusivu</a>
+        <a class="nav-link" href="/etusivu">Etusivu</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/menolista">Menot</a>
@@ -30,6 +30,11 @@
         <a class="nav-link" href="/kategorialista">Kategoriat</a>
       </li>
     </ul>
+  </div>
+    <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
   </div>
 </nav>
 

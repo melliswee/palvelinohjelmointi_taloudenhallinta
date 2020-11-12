@@ -30,6 +30,11 @@
       </li>
     </ul>
   </div>
+    <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
+  </div>
 </nav>
 
 <p th:text="${message}" />

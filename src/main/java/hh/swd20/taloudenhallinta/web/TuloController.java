@@ -3,9 +3,12 @@ package hh.swd20.taloudenhallinta.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,9 +63,22 @@ public class TuloController {
 	}
 	
 	@PostMapping("/savetulo")
-	public String savetulo(Tulo tulo) {
-		trepository.save(tulo);
-		return "redirect:tulolista";
+	public String savetulo(@Valid Tulo tulo, BindingResult bresult, Model model) {
+		if (bresult.hasErrors()) {
+			
+			model.addAttribute("tulokategoriat", tkrepository.findAll());
+			model.addAttribute("jasenet", jrepository.findAll());
+			
+			if (tulo.getTuloId() == null) {
+				return "addtulo";
+			} else {
+				return "edittulo";
+			}
+			
+		} else {
+			trepository.save(tulo);
+			return "redirect:tulolista";
+		}
 	}
 	
 	@GetMapping("/deletetulo/{id}")

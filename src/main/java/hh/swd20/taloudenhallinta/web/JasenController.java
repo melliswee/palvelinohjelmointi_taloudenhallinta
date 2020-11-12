@@ -3,9 +3,13 @@ package hh.swd20.taloudenhallinta.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,22 +55,31 @@ public class JasenController {
 	}
 	
 	@PostMapping("/savejasen")
-	public String savejasen(Jasen jasen) {
-		jrepository.save(jasen);
-		return "redirect:jasenlista";
+	public String savejasen(@Valid Jasen jasen, BindingResult bresult) {
+		if (bresult.hasErrors()) {
+			if(jasen.getJasenId() == null) {
+				return "/addjasen";
+			} else {
+				return "/editjasen";
+			}
+			
+		} else {
+			jrepository.save(jasen);
+			return "redirect:jasenlista";
+		}
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/deletejasen/{id}")
 	public String deleteJasen(@PathVariable("id") Long jasenId, Model model) {
 		jrepository.deleteById(jasenId);
 		return "redirect:../jasenlista";
 	}
 	
-	//TODO: editjasen
 	@GetMapping("/editjasen/{id}")
 	public String editJasen(@PathVariable("id") Long jasenId, Model model) {
-		model.addAttribute("jasen", jrepository.findById(jasenId));
-		return "editjasen";
+			model.addAttribute("jasen", jrepository.findById(jasenId));
+			return "editjasen";
 	}
 
 }

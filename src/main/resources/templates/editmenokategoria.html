@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
+<html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -32,6 +32,11 @@
         <a class="nav-link" href="/kategorialista">Kategoriat</a>
       </li>
     </ul>
+  </div>
+    <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
   </div>
 </nav>
 

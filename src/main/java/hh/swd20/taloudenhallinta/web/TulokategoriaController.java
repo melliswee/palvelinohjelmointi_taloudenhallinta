@@ -3,9 +3,13 @@ package hh.swd20.taloudenhallinta.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,11 +47,20 @@ public class TulokategoriaController {
 	}
 	
 	@PostMapping("/savetulokategoria")
-	public String saveTulokategoria(Tulokategoria tulokategoria) {
-		tkrepository.save(tulokategoria);
-		return "redirect:kategorialista";
+	public String saveTulokategoria(@Valid Tulokategoria tulokategoria, BindingResult bresult) {
+		if (bresult.hasErrors()) {
+			if (tulokategoria.getTulokategoriaId() == null) {
+				return "/addtulokategoria";
+			} else {
+				return "edittulokategoria";
+			}
+		} else {
+			tkrepository.save(tulokategoria);
+			return "redirect:kategorialista";
+		}
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/deletetulokategoria/{id}")
 	public String deleteTulokategoria(@PathVariable("id") Long tulokategoriaId, Model model) {
 		tkrepository.deleteById(tulokategoriaId);

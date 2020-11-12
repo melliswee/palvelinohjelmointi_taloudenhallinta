@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
+<html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -31,12 +31,17 @@
       </li>
     </ul>
   </div>
+    <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
+  </div>
 </nav>
 
 <div>
 <h5>Lisää meno</h5>
 		<form th:object="${meno}" th:action="@{/savemeno}" action="#" method="post">
-
+			<p class="text-danger" th:if="${#fields.hasErrors('pvm')}" th:errors="*{pvm}">Error</p>
 		  	<label for="pvm">Päivämäärä</label>
 			<input type="date" id="pvm" th:value="*{pvm}" th:field="*{pvm}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
@@ -51,8 +56,9 @@
 			<input type="text" th:field="*{muistiinpano}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
+			<p class="text-danger" th:if="${#fields.hasErrors('summa')}" th:errors="*{summa}">Error</p>
 			<label for="summa">Summa</label>
-			<input type="number" th:field="*{summa}" />
+			<input type="text" th:field="*{summa}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 
 			<div style="clear: both; display: block; height: 10px;"></div>					

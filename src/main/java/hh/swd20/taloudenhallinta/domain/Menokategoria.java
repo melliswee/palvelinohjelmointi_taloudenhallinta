@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,6 +19,9 @@ public class Menokategoria {
 	@Id //määrää tietokantataulun pääavaimen (PK)
 	@GeneratedValue(strategy = GenerationType.AUTO) //määrää että tietokantapalvelimen on luotava uniikki id tietoriville
 	private Long menokategoriaId;
+	
+	@NotEmpty(message="Nimi ei voi olla tyhjä.")
+	@Size(min=2, max=30, message="Nimessä täytyy olla vähintään 2 kirjainta ja enintään 30.")
 	private String menokategoriaNimi;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "menokategoria")

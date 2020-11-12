@@ -3,6 +3,7 @@
 <head>
 	<title>Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
 	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
@@ -29,12 +30,12 @@
       <li class="nav-item">
         <a class="nav-link" href="/kategorialista">Kategoriat</a>
       </li>
-      <li>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
-		</form>
-      </li>
     </ul>
+  </div>
+  <div>
+      	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+		</form>
   </div>
 </nav>
 

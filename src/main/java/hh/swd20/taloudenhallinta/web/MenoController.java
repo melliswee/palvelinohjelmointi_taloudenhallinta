@@ -3,9 +3,12 @@ package hh.swd20.taloudenhallinta.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,9 +91,21 @@ public class MenoController {
 	}
 	
 	@PostMapping("/savemeno")
-	public String savemeno(Meno meno) {
-		mrepository.save(meno);
-		return "redirect:menolista";
+	public String savemeno(@Valid Meno meno, BindingResult bresult, Model model) {
+		if (bresult.hasErrors()) {
+			
+			model.addAttribute("menokategoriat", mkrepository.findAll()); //tarvitaan mukaan pudotusvalikkoja varten
+			model.addAttribute("jasenet", jrepository.findAll()); //tarvitaan mukaan pudotusvalikkoja varten
+			
+			if (meno.getMenoId() == null) {
+				return "/addmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
+			} else {
+				return "/editmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
+			}
+		} else {
+			mrepository.save(meno);
+			return "redirect:menolista";
+		}
 	}
 	
 	@GetMapping("/deletemeno/{id}")

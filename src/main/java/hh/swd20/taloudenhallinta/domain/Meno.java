@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,9 +20,15 @@ public class Meno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //määrää että tietokantapalvelimen on luotava uniikki id tietoriville
 	private Long menoId;
+	
+	@NotNull(message="Aseta päivämäärä.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate pvm; //muotoa YYYY-mm-DD
+	
+	@NotNull(message="Aseta summa.")
+	@Positive(message="Summan pitää olla positiivinen luku.")
 	private double summa;
+	
 	private String muistiinpano;
 	
 	@ManyToOne

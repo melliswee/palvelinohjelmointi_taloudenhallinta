@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-	<title>Taloudenhallinta</title>
+	<title th:text="#{appname}"></title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <h3><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h3>
+  <h3><a class="navbar-brand" href="/etusivu" th:text="#{appname}"></a></h3>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/etusivu">Etusivu</a>
+        <a class="nav-link" href="/etusivu" th:text="#{home}"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/menolista">Menot</a>
+        <a class="nav-link" href="/menolista" th:text="#{expenses}"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tulolista">Tulot</a>
+        <a class="nav-link" href="/tulolista" th:text="#{income}"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="jasenlista">Jäsenet</a>
+        <a class="nav-link" href="jasenlista" th:text="#{members}"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/kategorialista">Kategoriat</a>
+        <a class="nav-link" href="/kategorialista" th:text="#{categories}"></a>
       </li>
     </ul>
   </div>
     <div>
-      	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+      	<form th:action="@{/logout}" method="post" th:text="#{logout}">
+			<input type="submit" class="btn btn-sm btn-light"/>
 		</form>
   </div>
 </nav>
 
 <div>
-<h5>Lisää jäsen</h5>
+<h5 th:text="#{addmember}"></h5>
 		<form th:object="${jasen}" th:action="@{/savejasen}" action="#" method="post">
 			<p class="text-danger" th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Error</p>
-		  	<label for="nimi">Nimi</label>
+		  	<label for="nimi" th:text="#{name}"></label>
 			<input type="text" id="nimi" th:field="*{nimi}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 
-			<input type="submit" value="Tallenna" class="btn btn-primary"></input>	
+			<button th:text="#{save}" class="btn btn-primary"></button>	
 		</form>
 	</div>
 

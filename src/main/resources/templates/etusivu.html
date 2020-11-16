@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+
+<!DOCTYPE html >
 <html xmlns:th="http://www.ThymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-	<title>Taloudenhallinta</title>
+	<title th:text="#{appname}"></title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
@@ -9,45 +10,54 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <h3><a class="navbar-brand" href="/etusivu">Taloudenhallinta</a></h3>
+  <h3><a class="navbar-brand" href="/etusivu" th:text="#{appname}"></a></h3>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Etusivu <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#" th:text="#{home}"><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/menolista">Menot</a>
+        <a class="nav-link" href="/menolista" th:text="#{expenses}">Menot</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tulolista">Tulot</a>
+        <a class="nav-link" href="/tulolista" th:text="#{income}">Tulot</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/jasenlista">Jäsenet</a>
+        <a class="nav-link" href="/jasenlista" th:text="#{members}">Jäsenet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/kategorialista">Kategoriat</a>
+        <a class="nav-link" href="/kategorialista" th:text="#{categories}">Kategoriat</a>
       </li>
     </ul>
   </div>
   <div>
-      	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-light"/>
+      	<form th:action="@{/logout}" method="post" th:text="#{logout}">
+			<input type="submit" class="btn btn-sm btn-light"/>
 		</form>
   </div>
 </nav>
 
-<div><h5><a href="/menolista">Menot</a></h5></div>
+<div class="jumbotron" style="background-color:#f5f5f5">
+  <h1 class="display-4" th:text="#{welcome}"></h1>
+  <p class="lead" th:text="#{filler}"></p>
+  <hr class="my-4">
+  <p th:text="#{order}"></p>
+  <a class="btn btn-info btn-lg" th:text="#{switch-fi}" href="#" role="button" onclick="window.location.href='http://localhost:8080/?localeData=fi'"></a>
+  <a class="btn btn-info btn-lg" th:text="#{switch-en}" href="#" role="button" onclick="window.location.href='http://localhost:8080/?localeData=en'"></a>
+</div>
+
+<div><h5><a href="/menolista" th:text="#{expenses}"></a></h5></div>
 
 <table class="table table-hover table-responsive-md">
 	<tr class="bg-info">
-		<th>Päivämäärä</th>
-		<th>Tyyppi</th>
-		<th>Muistiinpano</th>
-		<th>Summa</th>
-		<th>Maksaja</th>
+		<th th:text="#{date}"></th>
+		<th th:text="#{type}"></th>
+		<th th:text="#{notes}"></th>
+		<th th:text="#{sum}"></th>
+		<th th:text="#{payer}"></th>
 		<th></th>
 		<th></th>
 	</tr>
@@ -57,24 +67,24 @@
 		<td th:text="${ meno.getMuistiinpano() }"></td>
 		<td th:text="${ meno.getSumma() }"></td>
 		<td th:text="${ meno.getJasen().getNimi() }"></td>
-		<td><a th:href="@{/editmeno/{id}(id=${meno.menoId})}" class="btn btn-info">Muokkaa</a> </td>
-		<td><a th:href="@{/deletemeno/{id}(id=${meno.menoId})}" class="btn btn-danger">Poista</a></td>
+		<td><a th:href="@{/editmeno/{id}(id=${meno.menoId})}" class="btn btn-info" th:text="#{edit}"></a> </td>
+		<td><a th:href="@{/deletemeno/{id}(id=${meno.menoId})}" class="btn btn-danger" th:text="#{delete}"></a></td>
 	</tr>
 </table>
 
-<p><a href="/addmeno" class="btn btn-success">Lisää meno</a></p>
+<p><a href="/addmeno" class="btn btn-success" th:text="#{add}"></a></p>
 
 <div>
 
-<h5><a href="/tulolista">Tulot</a></h5>
+<h5><a href="/tulolista" th:text="#{income}"></a></h5>
 
 <table class="table table-hover table-responsive-md">
 	<tr class="bg-info">
-		<th>Päivämäärä</th>
-		<th>Tyyppi</th>
-		<th>Muistiinpano</th>
-		<th>Summa</th>
-		<th>Tuoja</th>
+		<th th:text="#{date}"></th>
+		<th th:text="#{type}"></th>
+		<th th:text="#{notes}"></th>
+		<th th:text="#{sum}"></th>
+		<th th:text="#{user}"></th>
 		<th></th>
 		<th></th>
 	</tr>
@@ -84,12 +94,12 @@
 		<td th:text="${ tulo.getMuistiinpano() }"></td>
 		<td th:text="${ tulo.getSumma() }"></td>
 		<td th:text="${ tulo.getJasen().getNimi() }"></td>
-		<td><a th:href="@{/edittulo/{id}(id=${tulo.tuloId})}" class="btn btn-info">Muokkaa</a> </td>
-		<td><a th:href="@{/deletetulo/{id}(id=${tulo.tuloId})}" class="btn btn-danger">Poista</a></td>
+		<td><a th:href="@{/edittulo/{id}(id=${tulo.tuloId})}" class="btn btn-info" th:text="#{edit}"></a> </td>
+		<td><a th:href="@{/deletetulo/{id}(id=${tulo.tuloId})}" class="btn btn-danger" th:text="#{delete}"></a></td>
 	</tr>
 </table>
 
-<p><a href="/addtulo" class="btn btn-success">Lisää tulo</a></p>
+<p><a href="/addtulo" class="btn btn-success" th:text="#{add}"></a></p>
 </div>
 </body>
 </html>

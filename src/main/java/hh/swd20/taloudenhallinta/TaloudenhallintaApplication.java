@@ -1,6 +1,7 @@
 package hh.swd20.taloudenhallinta;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import hh.swd20.taloudenhallinta.domain.Jasen;
 import hh.swd20.taloudenhallinta.domain.JasenRepository;
@@ -24,13 +30,34 @@ import hh.swd20.taloudenhallinta.domain.UserRepository;
 
 
 @SpringBootApplication
-public class TaloudenhallintaApplication {
+public class TaloudenhallintaApplication implements WebMvcConfigurer{
 	
 	private static final Logger log = LoggerFactory.getLogger(TaloudenhallintaApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(TaloudenhallintaApplication.class, args);
 	}
+	/*monikielisyys-->*/
+	@Bean // <--- 1
+	public LocaleResolver localeResolver() {
+	    CookieLocaleResolver localeResolver = new CookieLocaleResolver(); // <--- 2
+	    localeResolver.setDefaultLocale(Locale.getDefault()); // <--- 3
+	    return localeResolver;
+	}
+	
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+	    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+	    // Defaults to "locale" if not set
+	    localeChangeInterceptor.setParamName("localeData");
+	    return localeChangeInterceptor;
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+	    interceptorRegistry.addInterceptor(localeChangeInterceptor());
+	}
+	/*<-- monikielisyys*/
 	
 	@Bean
 	public CommandLineRunner demo (MenoRepository mrepository, MenokategoriaRepository mkrepository, JasenRepository jrepository, TulokategoriaRepository tkrepository, TuloRepository trepository, UserRepository urepository) {
@@ -101,5 +128,6 @@ public class TaloudenhallintaApplication {
 			
 		};
 	}
+	
 
 }

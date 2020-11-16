@@ -29,7 +29,7 @@ public class JasenController {
 	private JasenRepository jrepository;
 	
 	@GetMapping("/jasenlista")
-	public String haeJaseset(Model model) {
+	public String haeJasenet(Model model) {
 		model.addAttribute("jasenet", jrepository.findAll());
 		return "jasenlista";
 	}

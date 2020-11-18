@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.ThymeLeaf.org">
 <head>
-	<title>Taloudenhallinta</title>
+	<title th:text="#{appname}">Taloudenhallinta</title>
 	<meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-<h3>Tervetuloa taloudenhallinta-sivulle!</h3>
-<h5>Kirjaudu sisään, ole hyvä.</h5>
-<p></p>
-<div th:if="${param.error}">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h3><a class="navbar-brand" href="/etusivu" th:text="#{appname}"></a></h3>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" th:text="#{home}"><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/menolista" th:text="#{expenses}">Menot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tulolista" th:text="#{income}">Tulot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jasenlista" th:text="#{members}">Jäsenet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kategorialista" th:text="#{categories}">Kategoriat</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+      	<form th:action="@{/logout}" method="post">
+			<button th:text="#{logout}" class="btn btn-sm btn-light"></button>
+		</form>
+  </div>
+</nav>
+
+<div class="jumbotron" style="background-color:#f5f5f5">
+  <h1 class="display-4" th:text="#{welcome}"></h1>
+  <p class="lead" th:text="#{filler}"></p>
+  <hr class="my-4">
+  <p th:text="#{loginorder}"></p>
+  <a class="btn btn-info btn-lg" th:text="#{switch-fi}" href="#" role="button" onclick="window.location.href='http://localhost:8080/?localeData=fi'"></a>
+  <a class="btn btn-info btn-lg" th:text="#{switch-en}" href="#" role="button" onclick="window.location.href='http://localhost:8080/?localeData=en'"></a>
+</div>
+
+<div class="wrapper">
+<div class="text-danger" th:if="${param.error}" th:text="#{loginfail}">
 	Salasana tai käyttäjätunnus oli väärin.
-	</div>
-	<form th:action="@{/login}"method="post">
+</div>
+<p></p>
+<form th:action="@{/login}"method="post">
 		<div>
-			<label>Käyttäjätunnus: <input type="text" name="username"/></label>
+			<label th:text="#{username}">Käyttäjätunnus:</label><input type="text" name="username"/>
 		</div>
 		<div>
-			<label>Salasana: <input type="password" name="password"/></label>
+			<label th:text="#{password}">Salasana:</label><input type="password" name="password"/>
 		</div>
-		<div>
-		<input type="submit"value="Kirjaudu" class="btn btn-success"/>
-		</div>
-	</form>
+		<button th:text="#{login}" class="btn btn-success"></button>
+</form>
+</div>
 </body>
 </html>

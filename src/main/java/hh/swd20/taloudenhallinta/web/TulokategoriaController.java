@@ -50,7 +50,7 @@ public class TulokategoriaController {
 	public String saveTulokategoria(@Valid Tulokategoria tulokategoria, BindingResult bresult) {
 		if (bresult.hasErrors()) {
 			if (tulokategoria.getTulokategoriaId() == null) {
-				return "/addtulokategoria";
+				return "addtulokategoria";
 			} else {
 				return "edittulokategoria";
 			}

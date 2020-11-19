@@ -98,9 +98,9 @@ public class MenoController {
 			model.addAttribute("jasenet", jrepository.findAll()); //tarvitaan mukaan pudotusvalikkoja varten
 			
 			if (meno.getMenoId() == null) {
-				return "/addmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
+				return "addmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
 			} else {
-				return "/editmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
+				return "editmeno"; //redirect-endpoint ei kelpaa, koska unohtaa virheellisen menon
 			}
 		} else {
 			mrepository.save(meno);

@@ -62,9 +62,9 @@ public class MenokategoriaController {
 	public String saveMenokategoria(@Valid Menokategoria menokategoria, BindingResult bresult) {
 		if (bresult.hasErrors()) {
 			if(menokategoria.getMenokategoriaId() == null) {
-				return "/addmenokategoria";
+				return "addmenokategoria";
 			} else {
-				return "/editmenokategoria";
+				return "editmenokategoria";
 			}
 		} else {
 			mkrepository.save(menokategoria);

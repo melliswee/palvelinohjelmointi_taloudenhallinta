@@ -58,9 +58,9 @@ public class JasenController {
 	public String savejasen(@Valid Jasen jasen, BindingResult bresult) {
 		if (bresult.hasErrors()) {
 			if(jasen.getJasenId() == null) {
-				return "/addjasen";
+				return "addjasen";
 			} else {
-				return "/editjasen";
+				return "editjasen";
 			}
 			
 		} else {

@@ -60,6 +60,11 @@ public class MenoController {
 	public String haeEtusivu(Model model) {
 		model.addAttribute("menot", mrepository.findAll());
 		model.addAttribute("tulot", trepository.findAll());
+		double summa = 0;
+		for (Meno meno : mrepository.findAll()) {
+			summa += meno.getSumma();
+		}
+		model.addAttribute("summa", summa);
 		return "etusivu";
 	}
 	

@@ -71,6 +71,15 @@
 		<td><a th:href="@{/editmeno/{id}(id=${meno.menoId})}" class="btn btn-info" th:text="#{edit}"></a> </td>
 		<td><a th:href="@{/deletemeno/{id}(id=${meno.menoId})}" class="btn btn-danger" th:text="#{delete}"></a></td>
 	</tr>
+	<tr>
+	<td></td>
+	<td></td>
+	<td th:text="#{total}">Yhteensä</td>
+	<td th:text="${summa}">Summa</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
 </table>
 
 <p><a href="/addmeno" class="btn btn-success" th:text="#{add}"></a></p>
